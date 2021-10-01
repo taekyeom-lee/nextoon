@@ -32,7 +32,6 @@ const HeaderPrimaryNavBlock = styled.div`
 
     li {
       font-size: 0.8rem;
-      color: white;
 
       margin-left: 20px;
     }

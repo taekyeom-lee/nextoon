@@ -1,7 +1,8 @@
-import { FaSearch, FaBell, FaUserCircle, FaAngleDown } from 'react-icons/fa';
-
 import styled from 'styled-components';
-import HeaderUserMenu from './HeaderUserMenu';
+import { FaSearch } from 'react-icons/fa';
+
+import HeaderNoti from './HeaderNoti';
+import HeaderUser from './HeaderUser';
 
 function HeaderSecondaryNav() {
   return (
@@ -10,11 +11,11 @@ function HeaderSecondaryNav() {
         <SeacrhBox />
       </NavElement>
       <NavElement>
-        <Notification />
+        <HeaderNoti />
       </NavElement>
-      <User />
-      <Caret />
-      <HeaderUserMenu />
+      <NavElement>
+        <HeaderUser />
+      </NavElement>
     </HeaderSecondaryNavBlock>
   );
 }
@@ -32,28 +33,15 @@ const NavElement = styled.div`
   color: white;
 
   margin-right: 20px;
+
+  :last-child {
+    margin-right: 0px;
+  }
 `;
 
 const SeacrhBox = styled(FaSearch)`
   width: 20px;
   height: 20px;
-`;
-
-const Notification = styled(FaBell)`
-  width: 24px;
-  height: 24px;
-`;
-
-const User = styled(FaUserCircle)`
-  width: 28px;
-  height: 28px;
-`;
-
-const Caret = styled(FaAngleDown)`
-  width: 16px;
-  heigth: 16px;
-
-  margin-left: 10px;
 `;
 
 export default HeaderSecondaryNav;

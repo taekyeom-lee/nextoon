@@ -6,20 +6,14 @@ import HeaderSecondaryNav from './HeaderSecondaryNav';
 function Header() {
   return (
     <Block>
-      <Inner>
-        <HeaderPrimaryNav />
-        <HeaderSecondaryNav />
-      </Inner>
+      <HeaderPrimaryNav />
+      <HeaderSecondaryNav />
     </Block>
   );
 }
 
 const Block = styled.div`
   height: 4rem;
-`;
-
-const Inner = styled.div`
-  height: 100%;
   display: flex;
   align-itmes: center;
   justify-content: space-between;
