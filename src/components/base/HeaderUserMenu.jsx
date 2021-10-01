@@ -18,7 +18,7 @@ const HeaderUserMenuBlock = styled.div`
   right: 0;
   width: 10rem;
   background-color: rgba(0, 0, 0, 0.9);
-  border: solid 1px rgba(255, 255, 255, 0.15);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.15);
   z-index: 999;
 
   padding: 10px 0;
