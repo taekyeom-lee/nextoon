@@ -10,7 +10,7 @@ function HeaderUser() {
   return (
     <HeaderUserBlock onMouseEnter={openMenu} onMouseLeave={closeMenu}>
       <User />
-      <AngleDown menuIsOpen={menuIsOpen} />
+      <AngleDown $menuIsOpen={menuIsOpen} />
       {menuIsOpen && <CaretUp />}
       {menuIsOpen && <HeaderUserMenu />}
     </HeaderUserBlock>
@@ -32,7 +32,7 @@ const AngleDown = styled(FaAngleDown)`
   heigth: 16px;
 
   margin-left: 10px;
-  transform: ${(props) => props.menuIsOpen && 'rotate(180deg)'};
+  transform: ${(props) => props.$menuIsOpen && 'rotate(180deg)'};
 `;
 
 const CaretUp = styled(FaCaretUp)`
