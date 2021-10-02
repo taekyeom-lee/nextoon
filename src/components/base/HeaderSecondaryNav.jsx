@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { FaSearch } from 'react-icons/fa';
 
+import HeaderSearchBox from './HeaderSearchBox';
 import HeaderNoti from './HeaderNoti';
 import HeaderUser from './HeaderUser';
 
@@ -8,7 +8,7 @@ function HeaderSecondaryNav() {
   return (
     <HeaderSecondaryNavBlock>
       <NavElement>
-        <SeacrhBox />
+        <HeaderSearchBox />
       </NavElement>
       <NavElement>
         <HeaderNoti />
@@ -37,11 +37,6 @@ const NavElement = styled.div`
   :last-child {
     margin-right: 0px;
   }
-`;
-
-const SeacrhBox = styled(FaSearch)`
-  width: 20px;
-  height: 20px;
 `;
 
 export default HeaderSecondaryNav;
