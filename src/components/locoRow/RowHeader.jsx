@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-function RowHeader() {
+function RowHeader({ title }) {
   return (
     <RowHeaderBlock>
-      <RowTitle>인기콘텐츠</RowTitle>
+      <RowTitle>{title}</RowTitle>
     </RowHeaderBlock>
   );
 }

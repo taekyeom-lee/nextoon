@@ -1,24 +1,14 @@
 import styled from 'styled-components';
 
-import girl from '../../img/girl.jpg';
-
-function SliderItem() {
+function SliderItem({ dataImg }) {
   return (
     <SliderItemBlock>
-      <TitleCard src={girl} alt="title-card" />
-      <TitleCard src={girl} alt="title-card" />
-      <TitleCard src={girl} alt="title-card" />
-      <TitleCard src={girl} alt="title-card" />
-      <TitleCard src={girl} alt="title-card" />
-      <TitleCard src={girl} alt="title-card" />
+      <TitleCard src={dataImg} alt="title-card" />
     </SliderItemBlock>
   );
 }
 
-const SliderItemBlock = styled.div``;
-
-const TitleCard = styled.img`
-  width: 16.45%;
+const SliderItemBlock = styled.div`
   padding: 0 2px;
 
   &:first-child {
@@ -28,6 +18,13 @@ const TitleCard = styled.img`
   &:last-child {
     padding-right: 0;
   }
+`;
+
+const TitleCard = styled.img`
+  // width: 16.45%;
+  width: 292px;
+  height: 164px;
+  object-fit: cover;
 `;
 
 export default SliderItem;

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import useLocoRow from '../../hooks/useLocoRow';
 import RowContainer from './RowContainer';
 import RowHeader from './RowHeader';
 
-function LocoRow() {
+function LocoRow({ title }) {
+  const { data } = useLocoRow();
+
   return (
     <LocoRowBlock>
-      <RowHeader />
-      <RowContainer />
+      <RowHeader title={title} />
+      <RowContainer data={data} />
     </LocoRowBlock>
   );
 }

@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-import SliderItem from './SliderItem';
+import Slider from './Slider';
+import useSlider from '../../hooks/useSlider';
 
-function RowContainer() {
+function RowContainer({ data }) {
+  const { pageNumber, pageRef, raisePageNumber, lowerPageNumber } = useSlider();
+
+  let datas = data.slice(pageNumber * 6 - 6, pageNumber * 6);
+
   return (
     <RowContainerBlock>
       <HandlePrev>
-        <LeftAngle />
+        {pageNumber !== 1 && <LeftAngle onClick={lowerPageNumber} />}
       </HandlePrev>
-      <PaginationIndicator>
+      <PaginationIndicator ref={pageRef}>
+        <li></li>
         <li></li>
         <li></li>
         <li></li>
@@ -17,11 +23,9 @@ function RowContainer() {
         <li></li>
         <li></li>
       </PaginationIndicator>
-      <Slider>
-        <SliderItem />
-      </Slider>
+      <Slider datas={datas} />
       <HandleNext>
-        <RightAngle />
+        <RightAngle onClick={raisePageNumber} />
       </HandleNext>
     </RowContainerBlock>
   );
@@ -30,10 +34,6 @@ function RowContainer() {
 const RowContainerBlock = styled.div`
   position: relative;
   display: flex;
-`;
-
-const Slider = styled.div`
-  padding: 0 64px;
 `;
 
 const HandlePrev = styled.span`
