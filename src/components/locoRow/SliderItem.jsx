@@ -1,14 +1,23 @@
 import styled from 'styled-components';
+import usePreviewModal from '../../hooks/usePreviewModal';
+import PreViewModal from '../previewModal/PreviewModal';
 
-function SliderItem({ dataImg }) {
+function SliderItem({ dataImg, index }) {
+  const { previewModalIsOpen, mouseEnterItem, mouseLeaveItem } =
+    usePreviewModal();
   return (
-    <SliderItemBlock>
+    <SliderItemBlock
+      onMouseEnter={mouseEnterItem}
+      onMouseLeave={mouseLeaveItem}
+    >
       <TitleCard src={dataImg} alt="title-card" />
+      {previewModalIsOpen && <PreViewModal index={index} dataImg={dataImg} />}
     </SliderItemBlock>
   );
 }
 
 const SliderItemBlock = styled.div`
+  position: relative;
   padding: 0 2px;
 
   &:first-child {

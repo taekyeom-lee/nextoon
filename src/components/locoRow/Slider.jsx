@@ -5,8 +5,8 @@ import SliderItem from './SliderItem';
 function Slider({ datas }) {
   return (
     <SliderBlock>
-      {datas.map((data) => (
-        <SliderItem key={data.id} dataImg={data.dataImg} />
+      {datas.map((data, index) => (
+        <SliderItem key={data.id} dataImg={data.dataImg} index={index} />
       ))}
     </SliderBlock>
   );

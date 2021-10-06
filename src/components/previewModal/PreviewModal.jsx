@@ -3,14 +3,12 @@ import { AiOutlinePlus, AiOutlineLike, AiOutlineDislike } from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 
-import girl from '../../img/girl3.jpg';
-
-function PreViewModal() {
+function PreViewModal({ index, dataImg }) {
   return (
-    <PreviewModalBlock>
+    <PreviewModalBlock $index={index}>
       <PreviewModalImage>
         <ImageContainer>
-          <Image src={girl} />
+          <Image src={dataImg} />
         </ImageContainer>
       </PreviewModalImage>
       <PreviewModalInfo>
@@ -58,12 +56,33 @@ function PreViewModal() {
   );
 }
 
+const handleLeftType = (index) => {
+  switch (index) {
+    case 0:
+      return '0';
+    case 5:
+      return 'none';
+    default:
+      return '-74px';
+  }
+};
+
 const PreviewModalBlock = styled.div`
+  position: absolute;
+  top: -126px;
+  left: ${(props) => handleLeftType(props.$index)};
+  right: 0;
   width: 440px;
-  // height: 240px;
+  z-index: 100;
+  box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
+  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 `;
 
-const PreviewModalImage = styled.div``;
+const PreviewModalImage = styled.div`
+  height: 240px;
+`;
 
 // ImageContainer
 const ImageContainer = styled.div``;
@@ -72,10 +91,17 @@ const Image = styled.img`
   width: 440px;
   height: 240px;
   object-fit: cover;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 `;
 
 const PreviewModalInfo = styled.div`
+  height: 144px;
   padding: 16px;
+  background-color: #141414;
+
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
 
 // ButtonContainer
@@ -144,17 +170,17 @@ const Star = styled(FaStar)`
 
 const Rating = styled.span``;
 
-const MaturityRating = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  width: 32px;
-  height: 32px;
-  color: white;
-  background-color: red;
-  border-radius: 4px;
-`;
+// const MaturityRating = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 1.2rem;
+//   width: 32px;
+//   height: 32px;
+//   color: white;
+//   background-color: red;
+//   border-radius: 4px;
+// `;
 
 const Writer = styled.span``;
 
