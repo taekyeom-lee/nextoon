@@ -25,6 +25,7 @@ const TitleCard = styled.img`
   width: 292px;
   height: 164px;
   object-fit: cover;
+  border-radius: 4px;
 `;
 
 export default SliderItem;
