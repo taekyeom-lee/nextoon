@@ -1,9 +1,27 @@
 import styled from 'styled-components';
-import { AiOutlinePlus, AiOutlineLike, AiOutlineDislike } from 'react-icons/ai';
+import {
+  AiOutlinePlus,
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiOutlineCheck,
+  AiFillLike,
+  AiFillDislike,
+} from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
+import usePreviewModalButton from '../../hooks/usePreviewModalButton';
 
 function PreViewModal({ index, dataImg }) {
+  const {
+    plusButtonIsSelected,
+    likeButtonIsSelected,
+    dislikeButtonIsSelected,
+    clickPlusButton,
+    clickLikeButton,
+    clickDislikeButton,
+    clickAngleDownButton,
+  } = usePreviewModalButton();
+
   return (
     <PreviewModalBlock $index={index}>
       <PreviewModalImage>
@@ -13,16 +31,29 @@ function PreViewModal({ index, dataImg }) {
       </PreviewModalImage>
       <PreviewModalInfo>
         <ButtonContainer>
-          <Button>
-            <PlusButton />
+          <Button
+            onClick={clickPlusButton}
+            $buttonIsSelected={plusButtonIsSelected}
+          >
+            {plusButtonIsSelected ? <CheckButton /> : <PlusButton />}
           </Button>
-          <Button>
-            <LikeButton />
+          <Button
+            onClick={clickLikeButton}
+            $buttonIsSelected={likeButtonIsSelected}
+          >
+            {likeButtonIsSelected ? <FillLikeButton /> : <LikeButton />}
           </Button>
-          <Button>
-            <DislikeButton />
+          <Button
+            onClick={clickDislikeButton}
+            $buttonIsSelected={dislikeButtonIsSelected}
+          >
+            {dislikeButtonIsSelected ? (
+              <FillDislikeButton />
+            ) : (
+              <DislikeButton />
+            )}
           </Button>
-          <Button>
+          <Button onClick={clickAngleDownButton}>
             <AngleDownButton />
           </Button>
         </ButtonContainer>
@@ -78,6 +109,10 @@ const PreviewModalBlock = styled.div`
   border-radius: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const PreviewModalImage = styled.div`
@@ -117,7 +152,9 @@ const Button = styled.div`
   justify-content: center;
   width: 42px;
   height: 42px;
-  border: 2px solid white;
+  border: ${(props) =>
+    props.$buttonIsSelected ? '2px solid white' : '2px solid #c0c0c0'};
+  // border: 4px solid white;
   border-radius: 50%;
   margin: 4px;
 
@@ -127,6 +164,10 @@ const Button = styled.div`
 
   &:last-child {
     margin-left: auto;
+  }
+
+  :hover {
+    border: 2px solid white;
   }
 `;
 
@@ -146,6 +187,21 @@ const DislikeButton = styled(AiOutlineDislike)`
 `;
 
 const AngleDownButton = styled(FiChevronDown)`
+  width: 24px;
+  height: 24px;
+`;
+
+const CheckButton = styled(AiOutlineCheck)`
+  width: 24px;
+  height: 24px;
+`;
+
+const FillLikeButton = styled(AiFillLike)`
+  width: 24px;
+  height: 24px;
+`;
+
+const FillDislikeButton = styled(AiFillDislike)`
   width: 24px;
   height: 24px;
 `;

@@ -35,6 +35,10 @@ const TitleCard = styled.img`
   height: 164px;
   object-fit: cover;
   border-radius: 4px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default SliderItem;
