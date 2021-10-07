@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
-import girl from '../../img/girl.jpg';
-
 import EpisodeCard from './EpisodeCard';
 import MoreLikeContainer from './MoreLikeContainer';
 
-function PreviewDetailModal() {
+import girl from '../../img/girl.jpg';
+
+function PreviewDetailModal({ onClose }) {
   return (
     <PreviewDetailModalBlock>
       <PreviewDetailModalImage>
@@ -14,7 +14,7 @@ function PreviewDetailModal() {
           <Image src={girl} />
         </ImageContainer>
         <Close>
-          <CloseButton />
+          <CloseButton onClick={onClose} />
         </Close>
       </PreviewDetailModalImage>
       <PreviewDetailModalInfo>
@@ -28,14 +28,14 @@ function PreviewDetailModal() {
             <EpisodeHeaderSelector>시즌 1</EpisodeHeaderSelector>
           </EpisodeHeader>
           <EpisodeCardList>
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
-            <EpisodeCard />
+            <EpisodeCard index="1" />
+            <EpisodeCard index="2" />
+            <EpisodeCard index="3" />
+            <EpisodeCard index="4" />
+            <EpisodeCard index="5" />
+            <EpisodeCard index="6" />
+            <EpisodeCard index="7" />
+            <EpisodeCard index="8" />
           </EpisodeCardList>
         </EpisodeContainer>
         <MoreLikeContainer />
@@ -45,10 +45,21 @@ function PreviewDetailModal() {
 }
 
 const PreviewDetailModalBlock = styled.div`
+  position: absolute;
+  top: 40px;
+  left: calc((100% - 850px) / 2);
+  // right: 0;
+  // bottom: 0;
+
   width: 850px;
 
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   border-radius: 4px;
+  z-index: 1000;
+  background-color: #141414;
+
+  overflow-y: initial !important;
+  // overflow: hidden;
 `;
 const PreviewDetailModalImage = styled.div`
   position: relative;

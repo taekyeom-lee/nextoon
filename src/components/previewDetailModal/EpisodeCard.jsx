@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 import girl from '../../img/girl.jpg';
 
-function EpisodeCard() {
+function EpisodeCard({ index }) {
   return (
     <EpisodeCardBlock>
-      <TitleIndex>1</TitleIndex>
+      <TitleIndex>{index}</TitleIndex>
       <TitleCard src={girl} />
       <TextWrapper>
         <Title>나는 창원의 착한 남자</Title>

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-function RowHeader({ title }) {
+function RowHeader({ title, onOpen }) {
   return (
-    <RowHeaderBlock>
+    <RowHeaderBlock onClick={onOpen}>
       <RowTitle>{title}</RowTitle>
     </RowHeaderBlock>
   );
