@@ -98,6 +98,28 @@ const handleLeftType = (index) => {
   }
 };
 
+const handleTransformType = (index) => {
+  switch (index) {
+    case 0:
+      return 'translateX(-70px) scale(0.7)';
+    case 5:
+      return 'translateX(70px) scale(0.7)';
+    default:
+      return 'scale(0.7)';
+  }
+}
+
+const handleTransformHoverType = (index) => {
+  switch (index) {
+    case 0:
+      return 'translateX(0px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)';
+    case 5:
+      return 'translateX(0px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)';
+    default:
+      return 'none';
+  }
+}
+
 const PreviewModalBlock = styled.div`
   position: absolute;
   top: -126px;
@@ -109,9 +131,13 @@ const PreviewModalBlock = styled.div`
   border-radius: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  transform: ${(props) => handleTransformType(props.$index)}; 
 
   :hover {
     cursor: pointer;
+    transform-origin: center center;
+    transition: transform 0.5s;
+    transform: ${(props) => handleTransformHoverType(props.$index)};    
   }
 `;
 
@@ -154,7 +180,6 @@ const Button = styled.div`
   height: 42px;
   border: ${(props) =>
     props.$buttonIsSelected ? '2px solid white' : '2px solid #c0c0c0'};
-  // border: 4px solid white;
   border-radius: 50%;
   margin: 4px;
 
