@@ -62,9 +62,6 @@ function PreViewModal({ index, dataImg }) {
             <Star />
             <Rating>9.95</Rating>
           </TextItem>
-          {/* <TextItem>
-            <MaturityRating>19</MaturityRating>
-          </TextItem> */}
           <TextItem>
             <Writer>이태겸/리태겸</Writer>
           </TextItem>
@@ -99,7 +96,7 @@ const handleLeftType = (index) => {
 };
 
 const handleTransformType = (index) => {
-  switch (index) {
+  switch (index % 6) {
     case 0:
       return 'translateX(-70px) scale(0.7)';
     case 5:
@@ -107,10 +104,10 @@ const handleTransformType = (index) => {
     default:
       return 'scale(0.7)';
   }
-}
+};
 
 const handleTransformHoverType = (index) => {
-  switch (index) {
+  switch (index % 6) {
     case 0:
       return 'translateX(0px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)';
     case 5:
@@ -118,7 +115,7 @@ const handleTransformHoverType = (index) => {
     default:
       return 'none';
   }
-}
+};
 
 const PreviewModalBlock = styled.div`
   position: absolute;
@@ -131,13 +128,13 @@ const PreviewModalBlock = styled.div`
   border-radius: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  transform: ${(props) => handleTransformType(props.$index)}; 
+  transform: ${(props) => handleTransformType(props.$index)};
 
   :hover {
     cursor: pointer;
     transform-origin: center center;
     transition: transform 0.5s;
-    transform: ${(props) => handleTransformHoverType(props.$index)};    
+    transform: ${(props) => handleTransformHoverType(props.$index)};
   }
 `;
 
@@ -250,18 +247,6 @@ const Star = styled(FaStar)`
 `;
 
 const Rating = styled.span``;
-
-// const MaturityRating = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: 1.2rem;
-//   width: 32px;
-//   height: 32px;
-//   color: white;
-//   background-color: red;
-//   border-radius: 4px;
-// `;
 
 const Writer = styled.span``;
 

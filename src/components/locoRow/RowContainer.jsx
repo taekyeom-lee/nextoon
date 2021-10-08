@@ -7,9 +7,11 @@ import useSlider from '../../hooks/useSlider';
 function RowContainer({ data }) {
   const { pageNumber, pageRef, raisePageNumber, lowerPageNumber } = useSlider();
 
-  let datas = data.slice(pageNumber * 6 - 6, pageNumber * 6);
+  // let datas = data.slice(pageNumber * 6 - 6, pageNumber * 6);
   // let dataPrev = data.slice(pageNumber * 6 - 8, pageNumber * 6 - 7); // 처음에 들어감 마지막 들어가있음 -는 적용되는듯
   // let dataNext = data.slice(pageNumber * 6, pageNumber * 6 + 1); // 마지막 안들어감
+
+  let datas = data.slice(0);
 
   return (
     <RowContainerBlock>
@@ -25,7 +27,7 @@ function RowContainer({ data }) {
         <li></li>
         <li></li>
       </PaginationIndicator>
-      <Slider datas={datas} />
+      <Slider datas={datas} pageNumber={pageNumber} />
       <HandleNext>
         {pageNumber !== 7 && <RightAngle onClick={raisePageNumber} />}
       </HandleNext>
@@ -48,6 +50,11 @@ const HandlePrev = styled.span`
   justify-content: center;
   width: 60px;
   z-index: 20;
+
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  background: rgba(20, 20, 20, 0.5);
 `;
 
 const HandleNext = styled.span`
@@ -63,6 +70,8 @@ const HandleNext = styled.span`
 
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+
+  background: rgba(20, 20, 20, 0.5);
 `;
 
 const LeftAngle = styled(FaAngleLeft)`
