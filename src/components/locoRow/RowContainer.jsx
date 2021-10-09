@@ -36,42 +36,40 @@ function RowContainer({ data }) {
 }
 
 const RowContainerBlock = styled.div`
-  position: relative;
   display: flex;
-  height: 164px;
+  position: relative;
+  height: 165px;
+  padding: 0 60px;
 `;
 
 const HandlePrev = styled.span`
-  position: absolute;
-  top: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 60px;
+  background: rgba(20, 20, 20, 0.5);
   z-index: 20;
-
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-
-  background: rgba(20, 20, 20, 0.5);
 `;
 
 const HandleNext = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 60px;
+  background: rgba(20, 20, 20, 0.5);
   z-index: 20;
-
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-
-  background: rgba(20, 20, 20, 0.5);
 `;
 
 const LeftAngle = styled(FaAngleLeft)`
@@ -93,20 +91,19 @@ const RightAngle = styled(FaAngleRight)`
 `;
 
 const PaginationIndicator = styled.ul`
+  display: flex;
   position: absolute;
   top: 0px;
-  right: 62px;
-  display: flex;
+  right: 64px;
+  list-style-type: none;
   margin-top: -12px;
   padding: 0;
-  list-style-type: none;
 
   li {
     width: 12px;
     height: 2px;
     margin-left: 1px;
     background: #4d4d4d;
-    // background-color: #aaa;
   }
 `;
 
