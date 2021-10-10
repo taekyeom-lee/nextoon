@@ -11,7 +11,13 @@ import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 import usePreviewModalButton from '../../hooks/usePreviewModalButton';
 
-function PreViewModal({ index, dataImg }) {
+function PreViewModal({
+  index,
+  dataImg,
+  relativeTop,
+  relativeLeft,
+  pageNumber,
+}) {
   const {
     plusButtonIsSelected,
     likeButtonIsSelected,
@@ -23,7 +29,12 @@ function PreViewModal({ index, dataImg }) {
   } = usePreviewModalButton();
 
   return (
-    <PreviewModalBlock $index={index}>
+    <PreviewModalBlock
+      $index={index}
+      $relativeTop={relativeTop}
+      $relativeLeft={relativeLeft}
+      $pageNumber={pageNumber}
+    >
       <PreviewModalImage>
         <ImageContainer>
           <Image src={dataImg} />
@@ -84,23 +95,24 @@ function PreViewModal({ index, dataImg }) {
   );
 }
 
-const handleLeftType = (index) => {
-  switch (index) {
+const handleLeftType = (index, relativeLeft, pageNumber) => {
+  const left = relativeLeft - 1800 * (pageNumber - 1);
+  switch (index % 6) {
     case 0:
-      return '0';
+      return `calc(${left}px + 60px + 2px)`;
     case 5:
-      return 'none';
+      return `calc(${left}px + 60px + 2px - 144px)`;
     default:
-      return '-74px';
+      return `calc(${left}px + 60px + 2px - 72px)`;
   }
 };
 
 const handleTransformType = (index) => {
   switch (index % 6) {
     case 0:
-      return 'translateX(-70px) scale(0.7)';
+      return 'translateX(-66px) scale(0.7)';
     case 5:
-      return 'translateX(70px) scale(0.7)';
+      return 'translateX(66px) scale(0.7)';
     default:
       return 'scale(0.7)';
   }
@@ -119,9 +131,9 @@ const handleTransformHoverType = (index) => {
 
 const PreviewModalBlock = styled.div`
   position: absolute;
-  top: -126px;
-  left: ${(props) => handleLeftType(props.$index)};
-  right: 0;
+  top: calc(${(props) => props.$relativeTop + 'px'} - 126px);
+  left: ${(props) =>
+    handleLeftType(props.$index, props.$relativeLeft, props.$pageNumber)};
   width: 440px;
   z-index: 100;
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import usePreviewModal from '../../hooks/usePreviewModal';
-import PreViewModal from '../previewModal/PreviewModal';
 
-function SliderItem({ dataImg, index }) {
-  const { previewModalIsOpen, mouseEnterItem, mouseLeaveItem } =
+import usePreviewModal from '../../hooks/usePreviewModal';
+import PreviewModalPortal from '../previewModal/PreviewModalPortal';
+import PreviewModal from '../previewModal/PreviewModal';
+
+function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
+  const { previewModalIsOpen, titleCardRef, mouseEnterItem, mouseLeaveItem } =
     usePreviewModal();
 
   return (
@@ -11,16 +13,27 @@ function SliderItem({ dataImg, index }) {
       onMouseEnter={mouseEnterItem}
       onMouseLeave={mouseLeaveItem}
       $index={index}
+      ref={titleCardRef}
     >
       <TitleCard src={dataImg} alt="title-card" />
-      {previewModalIsOpen && <PreViewModal index={index} dataImg={dataImg} />}
+      {previewModalIsOpen && (
+        <PreviewModalPortal>
+          <PreviewModal
+            index={index}
+            dataImg={dataImg}
+            relativeTop={relativeTop}
+            relativeLeft={titleCardRef.current.offsetLeft}
+            pageNumber={pageNumber}
+          />
+        </PreviewModalPortal>
+      )}
     </SliderItemBlock>
   );
 }
 
 const SliderItemBlock = styled.div`
   position: relative;
-  padding: 0 2p
+  padding: 0 2px;
 
   z-index: 10;
 `;

@@ -3,18 +3,23 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 import Slider from './Slider';
 import useSlider from '../../hooks/useSlider';
+import { useState, useEffect, useRef } from 'react';
 
 function RowContainer({ data }) {
-  const { pageNumber, pageRef, raisePageNumber, lowerPageNumber } = useSlider();
+  const [relativeTop, setRelativeTop] = useState(0);
+  const rowRef = useRef(null);
 
-  // let datas = data.slice(pageNumber * 6 - 6, pageNumber * 6);
-  // let dataPrev = data.slice(pageNumber * 6 - 8, pageNumber * 6 - 7); // 처음에 들어감 마지막 들어가있음 -는 적용되는듯
-  // let dataNext = data.slice(pageNumber * 6, pageNumber * 6 + 1); // 마지막 안들어감
+  const { pageNumber, pageRef, raisePageNumber, lowerPageNumber } = useSlider();
 
   let datas = data.slice(0);
 
+  useEffect(() => {
+    rowRef.current && console.log(rowRef.current.offsetTop);
+    setRelativeTop(rowRef.current.offsetTop);
+  }, [setRelativeTop]);
+
   return (
-    <RowContainerBlock>
+    <RowContainerBlock ref={rowRef}>
       <HandlePrev>
         {pageNumber !== 1 && <LeftAngle onClick={lowerPageNumber} />}
       </HandlePrev>
@@ -27,7 +32,7 @@ function RowContainer({ data }) {
         <li></li>
         <li></li>
       </PaginationIndicator>
-      <Slider datas={datas} pageNumber={pageNumber} />
+      <Slider datas={datas} pageNumber={pageNumber} relativeTop={relativeTop} />
       <HandleNext>
         {pageNumber !== 7 && <RightAngle onClick={raisePageNumber} />}
       </HandleNext>
