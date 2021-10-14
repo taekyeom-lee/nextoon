@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-function PreviewDetailBackDrop({ onClose }) {
+function PreviewDetailBackdrop({ onClose }) {
   return (
-    <PreviewDetailBackDropBlock onClick={onClose}></PreviewDetailBackDropBlock>
+    <PreviewDetailBackdropBlock onClick={onClose}></PreviewDetailBackdropBlock>
   );
 }
 
-const PreviewDetailBackDropBlock = styled.div`
+const PreviewDetailBackdropBlock = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -16,4 +16,4 @@ const PreviewDetailBackDropBlock = styled.div`
   z-index: 100;
 `;
 
-export default PreviewDetailBackDrop;
+export default PreviewDetailBackdrop;

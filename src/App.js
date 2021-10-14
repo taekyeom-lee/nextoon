@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+// import { useState, useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './pages/home/HomePage';
@@ -7,35 +7,37 @@ import NovelPage from './pages/novel/NovelPage';
 import LastestPage from './pages/latest/LastestPage';
 import MyListPage from './pages/mylist/MyListPage';
 
-import PreviewDetailModal from './components/previewDetailModal/PreviewDetailModal';
-import PreviewDetailBackDrop from './components/previewDetailModal/PreviewDetailBackDrop';
-import PreviewDetailModalPortal from './components/previewDetailModal/PreviewDetailModalPortal';
+// import PreviewDetailModal from './components/previewDetailModal/PreviewDetailModal';
+// import PreviewDetailBackDrop from './components/previewDetailModal/PreviewDetailBackDrop';
+// import PreviewDetailModalPortal from './components/previewDetailModal/PreviewDetailModalPortal';
 
 import './App.css';
 
 function App() {
-  const pageRef = useRef(null);
-  const [previewDetailModalIsOpen, setPreviewDetailModalIsOpen] =
-    useState(false);
+  // const pageRef = useRef(null);
+  // const [previewDetailModalIsOpen, setPreviewDetailModalIsOpen] =
+  //   useState(false);
 
-  const openPreviewDetailModal = () => {
-    setPreviewDetailModalIsOpen(true);
-    pageRef.current.style.position = 'fixed';
-  };
+  // const openPreviewDetailModal = () => {
+  //   setPreviewDetailModalIsOpen(true);
+  //   pageRef.current.style.position = 'fixed';
+  // };
 
-  const closePreviewDetailModal = () => {
-    setPreviewDetailModalIsOpen(false);
-    pageRef.current.style.position = '';
-  };
+  // const closePreviewDetailModal = () => {
+  //   setPreviewDetailModalIsOpen(false);
+  //   pageRef.current.style.position = '';
+  // };
 
   return (
     <div className="App">
-      <div ref={pageRef}>
+      <div>
+      {/* <div ref={pageRef}> */}
         <Switch>
           <Route
             path="/"
             exact
-            render={() => <HomePage onOpen={openPreviewDetailModal} />}
+            render={() => <HomePage />}
+            // render={() => <HomePage onOpen={openPreviewDetailModal} />}
           />
           <Route path="/comic" component={ComicPage} />
           <Route path="/novel" component={NovelPage} />
@@ -43,12 +45,12 @@ function App() {
           <Route path="/my-list" component={MyListPage} />
         </Switch>
       </div>
-      {previewDetailModalIsOpen && (
+      {/* {previewDetailModalIsOpen && (
         <PreviewDetailModalPortal>
           <PreviewDetailModal onClose={closePreviewDetailModal} />
         </PreviewDetailModalPortal>
       )}
-      {previewDetailModalIsOpen && <PreviewDetailBackDrop onClose={closePreviewDetailModal} />}
+      {previewDetailModalIsOpen && <PreviewDetailBackDrop onClose={closePreviewDetailModal} />} */}
       
     </div>
   );

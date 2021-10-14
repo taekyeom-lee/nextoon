@@ -4,6 +4,7 @@ function usePreviewModalButton() {
   const [plusButtonIsSelected, setPlusButtonIsSelected] = useState(false);
   const [likeButtonIsSelected, setLikeButtonIsSelected] = useState(false);
   const [dislikeButtonIsSelected, setDislikeButtonIsSelected] = useState(false);
+  const [angleDownButtonIsSelected, setAngleDownButtonIsSelected] = useState(false);
 
   const clickPlusButton = () => {
     setPlusButtonIsSelected((prevState) => !prevState);
@@ -20,12 +21,15 @@ function usePreviewModalButton() {
     likeButtonIsSelected && setLikeButtonIsSelected((prevState) => !prevState);
   };
 
-  const clickAngleDownButton = () => {};
+  const clickAngleDownButton = () => {
+    setAngleDownButtonIsSelected((prevState) => !prevState);
+  };
 
   return {
     plusButtonIsSelected,
     likeButtonIsSelected,
     dislikeButtonIsSelected,
+    angleDownButtonIsSelected,
     clickPlusButton,
     clickLikeButton,
     clickDislikeButton,

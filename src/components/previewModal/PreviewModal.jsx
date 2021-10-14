@@ -11,6 +11,10 @@ import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 import usePreviewModalButton from '../../hooks/usePreviewModalButton';
 
+import PreviewDetailModalPortal from '../previewDetailModal/PreviewDetailModalPortal';
+import PreviewDetailModal from '../previewDetailModal/PreviewDetailModal';
+import PreviewDetailBackdrop from '../previewDetailModal/PreviewDetailBackdrop';
+
 function PreViewModal({
   index,
   dataImg,
@@ -22,11 +26,14 @@ function PreViewModal({
     plusButtonIsSelected,
     likeButtonIsSelected,
     dislikeButtonIsSelected,
+    angleDownButtonIsSelected,
     clickPlusButton,
     clickLikeButton,
     clickDislikeButton,
     clickAngleDownButton,
   } = usePreviewModalButton();
+
+  console.log('preview-modal', angleDownButtonIsSelected)
 
   return (
     <PreviewModalBlock
@@ -91,6 +98,12 @@ function PreViewModal({
           </TagItem>
         </TagContainer>
       </PreviewModalInfo>
+      {angleDownButtonIsSelected && (
+        <PreviewDetailModalPortal>
+          <PreviewDetailModal />
+          <PreviewDetailBackdrop />
+        </PreviewDetailModalPortal>
+      )}
     </PreviewModalBlock>
   );
 }
