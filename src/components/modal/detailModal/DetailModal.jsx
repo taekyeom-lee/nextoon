@@ -4,20 +4,20 @@ import { MdClose } from 'react-icons/md';
 import EpisodeCard from './EpisodeCard';
 import MoreLikeContainer from './MoreLikeContainer';
 
-import girl from '../../img/girl.jpg';
+import girl from '../../../img/girl.jpg';
 
-function PreviewDetailModal({ onClose }) {
+function DetailModal() {
   return (
-    <PreviewDetailModalBlock>
-      <PreviewDetailModalImage>
+    <DetailModalBlock>
+      <DetailModalImage>
         <ImageContainer>
           <Image src={girl} />
         </ImageContainer>
         <Close>
-          <CloseButton onClick={onClose} />
+          <CloseButton />
         </Close>
-      </PreviewDetailModalImage>
-      <PreviewDetailModalInfo>
+      </DetailModalImage>
+      <DetailModalInfo>
         <DetailContainer>
           Detail Blur Blur Blur Blur Blur... Blur Blur Blur Blur Blur... Blur
           Blur Blur Blur Blur...
@@ -39,29 +39,26 @@ function PreviewDetailModal({ onClose }) {
           </EpisodeCardList>
         </EpisodeContainer>
         <MoreLikeContainer />
-      </PreviewDetailModalInfo>
-    </PreviewDetailModalBlock>
+      </DetailModalInfo>
+    </DetailModalBlock>
   );
 }
 
-const PreviewDetailModalBlock = styled.div`
+const DetailModalBlock = styled.div`
   position: absolute;
   top: 40px;
   left: calc((100% - 850px) / 2);
-  // right: 0;
-  // bottom: 0;
 
   width: 850px;
 
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   border-radius: 4px;
-  z-index: 1000;
+  z-index: 100;
   background-color: #141414;
 
   overflow-y: initial !important;
-  // overflow: hidden;
 `;
-const PreviewDetailModalImage = styled.div`
+const DetailModalImage = styled.div`
   position: relative;
 `;
 
@@ -94,7 +91,7 @@ const CloseButton = styled(MdClose)`
   height: 24px;
 `;
 
-const PreviewDetailModalInfo = styled.div`
+const DetailModalInfo = styled.div`
   padding: 0 48px;
 `;
 
@@ -122,4 +119,4 @@ const EpisodeHeaderSelector = styled.div`
 
 const EpisodeCardList = styled.div``;
 
-export default PreviewDetailModal;
+export default DetailModal;

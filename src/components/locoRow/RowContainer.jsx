@@ -1,22 +1,18 @@
 import styled from 'styled-components';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-import Slider from './Slider';
-import useSlider from '../../hooks/useSlider';
-import { useState, useEffect, useRef } from 'react';
+import Slider from '../slider/Slider';
+import useRowContainer from '../../hooks/useRowContainer';
 
-function RowContainer({ data }) {
-  const [relativeTop, setRelativeTop] = useState(0);
-  const rowRef = useRef(null);
-
-  const { pageNumber, pageRef, raisePageNumber, lowerPageNumber } = useSlider();
-
-  let datas = data.slice(0);
-
-  useEffect(() => {
-    rowRef.current && console.log(rowRef.current.offsetTop);
-    setRelativeTop(rowRef.current.offsetTop);
-  }, [setRelativeTop]);
+function RowContainer({ datas }) {
+  const {
+    pageNumber,
+    relativeTop,
+    pageRef,
+    rowRef,
+    raisePageNumber,
+    lowerPageNumber,
+  } = useRowContainer();
 
   return (
     <RowContainerBlock ref={rowRef}>
@@ -57,7 +53,7 @@ const HandlePrev = styled.span`
   left: 0;
   width: 60px;
   background: rgba(20, 20, 20, 0.5);
-  z-index: 20;
+  z-index: 10;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
@@ -72,7 +68,7 @@ const HandleNext = styled.span`
   right: 0;
   width: 60px;
   background: rgba(20, 20, 20, 0.5);
-  z-index: 20;
+  z-index: 10;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 `;

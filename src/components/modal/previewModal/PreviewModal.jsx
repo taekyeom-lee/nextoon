@@ -9,11 +9,12 @@ import {
 } from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
-import usePreviewModalButton from '../../hooks/usePreviewModalButton';
 
-import PreviewDetailModalPortal from '../previewDetailModal/PreviewDetailModalPortal';
-import PreviewDetailModal from '../previewDetailModal/PreviewDetailModal';
-import PreviewDetailBackdrop from '../previewDetailModal/PreviewDetailBackdrop';
+import DetailModal from '../detailModal/DetailModal';
+import DetailBackdrop from '../detailModal/DetailBackdrop';
+import usePreviewModalButton from '../../../hooks/usePreviewModalButton';
+
+import DetailModalPortal from '../../../portal/DetailModalPortal';
 
 function PreViewModal({
   index,
@@ -33,7 +34,7 @@ function PreViewModal({
     clickAngleDownButton,
   } = usePreviewModalButton();
 
-  console.log('preview-modal', angleDownButtonIsSelected)
+  console.log(angleDownButtonIsSelected);
 
   return (
     <PreviewModalBlock
@@ -99,10 +100,10 @@ function PreViewModal({
         </TagContainer>
       </PreviewModalInfo>
       {angleDownButtonIsSelected && (
-        <PreviewDetailModalPortal>
-          <PreviewDetailModal />
-          <PreviewDetailBackdrop />
-        </PreviewDetailModalPortal>
+        <DetailModalPortal>
+          <DetailModal />
+          <DetailBackdrop />
+        </DetailModalPortal>
       )}
     </PreviewModalBlock>
   );
@@ -148,7 +149,7 @@ const PreviewModalBlock = styled.div`
   left: ${(props) =>
     handleLeftType(props.$index, props.$relativeLeft, props.$pageNumber)};
   width: 440px;
-  z-index: 100;
+  z-index: 20;
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   border-radius: 4px;
   border-top-left-radius: 4px;

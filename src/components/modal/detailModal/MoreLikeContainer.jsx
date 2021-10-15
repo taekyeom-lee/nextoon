@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import girl2 from '../../img/girl2.jpg';
-import girl3 from '../../img/girl3.jpg';
-import girl4 from '../../img/girl4.jpg';
-import girl5 from '../../img/girl5.jpg';
-import girl6 from '../../img/girl6.jpg';
-import girl7 from '../../img/girl7.jpg';
+import girl2 from '../../../img/girl2.jpg';
+import girl3 from '../../../img/girl3.jpg';
+import girl4 from '../../../img/girl4.jpg';
+import girl5 from '../../../img/girl5.jpg';
+import girl6 from '../../../img/girl6.jpg';
+import girl7 from '../../../img/girl7.jpg';
 
 function MoreLikeContainer() {
   return (

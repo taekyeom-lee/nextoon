@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
-function useSlider() {
+function useRowContainer() {
   const [pageNumber, setPageNumber] = useState(1);
+  const [relativeTop, setRelativeTop] = useState(0);
 
   const pageRef = useRef(null);
+  const rowRef = useRef(null);
 
   const raisePageNumber = () => {
     setPageNumber(pageNumber + 1);
@@ -24,9 +26,18 @@ function useSlider() {
       pageRef.current.children[i].style.backgroundColor = '#4d4d4d';
     }
     pageRef.current.children[pageNumber - 1].style.backgroundColor = '#aaa';
-  });
 
-  return { pageNumber, pageRef, raisePageNumber, lowerPageNumber };
+    setRelativeTop(rowRef.current.offsetTop);
+  }, [pageNumber, setRelativeTop]);
+
+  return {
+    pageNumber,
+    relativeTop,
+    pageRef,
+    rowRef,
+    raisePageNumber,
+    lowerPageNumber,
+  };
 }
 
-export default useSlider;
+export default useRowContainer;

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
+import PreviewModal from '../modal/previewModal/PreviewModal';
 import usePreviewModal from '../../hooks/usePreviewModal';
-import PreviewModalPortal from '../previewModal/PreviewModalPortal';
-import PreviewModal from '../previewModal/PreviewModal';
+
+import PreviewModalPortal from '../../portal/PreviewModalPortal';
 
 function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
   const { previewModalIsOpen, titleCardRef, mouseEnterItem, mouseLeaveItem } =

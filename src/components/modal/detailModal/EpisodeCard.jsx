@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import girl from '../../img/girl.jpg';
+import girl from '../../../img/girl.jpg';
 
 function EpisodeCard({ index }) {
   return (
