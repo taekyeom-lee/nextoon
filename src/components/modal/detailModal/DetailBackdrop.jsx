@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-function DetailBackdrop() {
-  return <DetailBackdropBlock></DetailBackdropBlock>;
+function DetailBackdrop({ onClose }) {
+  return <DetailBackdropBlock onClick={onClose}></DetailBackdropBlock>;
 }
 
 const DetailBackdropBlock = styled.div`

@@ -6,14 +6,14 @@ import MoreLikeContainer from './MoreLikeContainer';
 
 import girl from '../../../img/girl.jpg';
 
-function DetailModal() {
+function DetailModal({ onClose }) {
   return (
     <DetailModalBlock>
       <DetailModalImage>
         <ImageContainer>
           <Image src={girl} />
         </ImageContainer>
-        <Close>
+        <Close onClick={onClose}>
           <CloseButton />
         </Close>
       </DetailModalImage>
@@ -56,7 +56,11 @@ const DetailModalBlock = styled.div`
   z-index: 100;
   background-color: #141414;
 
-  overflow-y: initial !important;
+  // overflow-y: initial !important;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 const DetailModalImage = styled.div`
   position: relative;

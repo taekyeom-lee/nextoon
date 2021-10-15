@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import {
   AiOutlinePlus,
@@ -10,11 +11,7 @@ import {
 import { FiChevronDown } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 
-import DetailModal from '../detailModal/DetailModal';
-import DetailBackdrop from '../detailModal/DetailBackdrop';
 import usePreviewModalButton from '../../../hooks/usePreviewModalButton';
-
-import DetailModalPortal from '../../../portal/DetailModalPortal';
 
 function PreViewModal({
   index,
@@ -22,6 +19,7 @@ function PreViewModal({
   relativeTop,
   relativeLeft,
   pageNumber,
+  propFunction,
 }) {
   const {
     plusButtonIsSelected,
@@ -34,7 +32,9 @@ function PreViewModal({
     clickAngleDownButton,
   } = usePreviewModalButton();
 
-  console.log(angleDownButtonIsSelected);
+  useEffect(() => {
+    propFunction(angleDownButtonIsSelected);
+  });
 
   return (
     <PreviewModalBlock
@@ -99,12 +99,6 @@ function PreViewModal({
           </TagItem>
         </TagContainer>
       </PreviewModalInfo>
-      {angleDownButtonIsSelected && (
-        <DetailModalPortal>
-          <DetailModal />
-          <DetailBackdrop />
-        </DetailModalPortal>
-      )}
     </PreviewModalBlock>
   );
 }
