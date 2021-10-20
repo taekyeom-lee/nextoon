@@ -15,6 +15,7 @@ function Slider({ datas, pageNumber, relativeTop }) {
           index={index}
           relativeTop={relativeTop}
           pageNumber={pageNumber}
+          totalWidth={width}
         />
       ))}
     </SliderBlock>
@@ -22,7 +23,7 @@ function Slider({ datas, pageNumber, relativeTop }) {
 }
 
 const handleTransformType = (pageNumber, width) => {
-  const x = -(width - 120) * (pageNumber - 1);
+  const x = -(width - 17 - 120) * (pageNumber - 1);
 
   const transformX = 'translateX(' + x + 'px)';
   return transformX;
@@ -30,10 +31,14 @@ const handleTransformType = (pageNumber, width) => {
 
 const SliderBlock = styled.div`
   display: flex;
+  position: relative;
   padding-bottom: 1px;
 
   transform: ${(props) => handleTransformType(props.$pageNumber, props.$width)};
   transition: transform 300ms;
+
+  width: 100%;
+  height: calc(100% - 1px);
 `;
 
 export default Slider;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import PreviewModal from '../modal/previewModal/PreviewModal';
@@ -7,11 +8,16 @@ import usePreviewModal from '../../hooks/usePreviewModal';
 
 import PreviewModalPortal from '../../portal/PreviewModalPortal';
 import DetailModalPortal from '../../portal/DetailModalPortal';
-import { useState } from 'react';
 
-function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
-  const { previewModalIsOpen, titleCardRef, mouseEnterItem, mouseLeaveItem } =
-    usePreviewModal();
+function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
+  const {
+    previewModalIsOpen,
+    width,
+    height,
+    titleCardRef,
+    mouseEnterItem,
+    mouseLeaveItem,
+  } = usePreviewModal();
 
   const [detailModaIsOpen, setDetailModalIsOpen] = useState(false);
 
@@ -26,8 +32,8 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
 
   return (
     <SliderItemBlock
-      // onMouseEnter={mouseEnterItem}
-      onMouseOver={mouseEnterItem}
+      // onMouseOver={mouseEnterItem}
+      onMouseEnter={mouseEnterItem}
       onMouseLeave={mouseLeaveItem}
       $index={index}
       ref={titleCardRef}
@@ -41,6 +47,9 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
             relativeTop={relativeTop}
             relativeLeft={titleCardRef.current.offsetLeft}
             pageNumber={pageNumber}
+            width={width}
+            height={height}
+            totalWidth={totalWidth}
             propFunction={highFunction}
           />
         </PreviewModalPortal>
@@ -57,14 +66,14 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber }) {
 
 const SliderItemBlock = styled.div`
   position: relative;
-  padding: 0 2px;
-
   z-index: 10;
+  flex: 0 0 calc(16.66666667% - 4px);
+  margin: 0 2px;
 `;
 
 const TitleCard = styled.img`
-  width: calc(((100vw - 120px) / 6) - (2px * 2));
-  height: 164px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 4px;
 

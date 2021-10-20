@@ -19,6 +19,9 @@ function PreViewModal({
   relativeTop,
   relativeLeft,
   pageNumber,
+  width,
+  height,
+  totalWidth,
   propFunction,
 }) {
   const {
@@ -35,16 +38,17 @@ function PreViewModal({
   useEffect(() => {
     propFunction(angleDownButtonIsSelected);
   });
-
   return (
     <PreviewModalBlock
       $index={index}
       $relativeTop={relativeTop}
       $relativeLeft={relativeLeft}
       $pageNumber={pageNumber}
+      $width={width}
+      $totalWidth={totalWidth}
     >
       <PreviewModalImage>
-        <ImageContainer>
+        <ImageContainer $width={width} $height={height}>
           <Image src={dataImg} />
         </ImageContainer>
       </PreviewModalImage>
@@ -103,35 +107,22 @@ function PreViewModal({
   );
 }
 
-const handleLeftType = (index, relativeLeft, pageNumber) => {
-  const left = relativeLeft - 1800 * (pageNumber - 1);
-  switch (index % 6) {
-    case 0:
-      return `calc(${left}px + 60px + 2px)`;
-    case 5:
-      return `calc(${left}px + 60px + 2px - 144px)`;
-    default:
-      return `calc(${left}px + 60px + 2px - 72px)`;
-  }
+const handleLeftType = (relativeLeft, pageNumber, width, totalWidth) => {
+  const left = relativeLeft - (totalWidth - 60 * 2 - 17) * (pageNumber - 1);
+
+  return `calc((((${
+    width * 1.5
+  }px - ${width}px) / 2) * -1) + ${left}px + 60px)`;
 };
 
-const handleTransformType = (index) => {
-  switch (index % 6) {
-    case 0:
-      return 'translateX(-66px) scale(0.7)';
-    case 5:
-      return 'translateX(66px) scale(0.7)';
-    default:
-      return 'scale(0.7)';
-  }
-};
+const handleTransformHoverType = (index, width) => {
+  const x = Math.floor((width * 1.5 - width) / 2);
 
-const handleTransformHoverType = (index) => {
   switch (index % 6) {
     case 0:
-      return 'translateX(0px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)';
+      return `translateX(${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
     case 5:
-      return 'translateX(0px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)';
+      return `translateX(-${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
     default:
       return 'none';
   }
@@ -141,33 +132,40 @@ const PreviewModalBlock = styled.div`
   position: absolute;
   top: calc(${(props) => props.$relativeTop + 'px'} - 126px);
   left: ${(props) =>
-    handleLeftType(props.$index, props.$relativeLeft, props.$pageNumber)};
-  width: 440px;
+    handleLeftType(
+      props.$relativeLeft,
+      props.$pageNumber,
+      props.$width,
+      props.$totalWidth
+    )};
+  width: calc(${(props) => props.$width * 1.5}px);
   z-index: 20;
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   border-radius: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  transform: ${(props) => handleTransformType(props.$index)};
+  transform: scale(0.6666666666666667);
 
   :hover {
     cursor: pointer;
     transform-origin: center center;
     transition: transform 0.5s;
-    transform: ${(props) => handleTransformHoverType(props.$index)};
+    transform: ${(props) =>
+      handleTransformHoverType(props.$index, props.$width)};
   }
 `;
 
-const PreviewModalImage = styled.div`
-  height: 240px;
-`;
+const PreviewModalImage = styled.div``;
 
 // ImageContainer
-const ImageContainer = styled.div``;
+const ImageContainer = styled.div`
+  width: calc(${(props) => props.$width * 1.5}px);
+  height: calc(${(props) => props.$height * 1.5}px);
+`;
 
 const Image = styled.img`
-  width: 440px;
-  height: 240px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;

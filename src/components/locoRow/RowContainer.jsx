@@ -16,9 +16,11 @@ function RowContainer({ datas }) {
 
   return (
     <RowContainerBlock ref={rowRef}>
-      <HandlePrev>
-        {pageNumber !== 1 && <LeftAngle onClick={lowerPageNumber} />}
-      </HandlePrev>
+      {pageNumber !== 1 && (
+        <HandlePrev>
+          <LeftAngle onClick={lowerPageNumber} />
+        </HandlePrev>
+      )}
       <PaginationIndicator ref={pageRef}>
         <li></li>
         <li></li>
@@ -29,18 +31,21 @@ function RowContainer({ datas }) {
         <li></li>
       </PaginationIndicator>
       <Slider datas={datas} pageNumber={pageNumber} relativeTop={relativeTop} />
-      <HandleNext>
-        {pageNumber !== 7 && <RightAngle onClick={raisePageNumber} />}
-      </HandleNext>
+      {pageNumber !== 7 && (
+        <HandleNext>
+          <RightAngle onClick={raisePageNumber} />
+        </HandleNext>
+      )}
     </RowContainerBlock>
   );
 }
 
 const RowContainerBlock = styled.div`
-  display: flex;
   position: relative;
   height: 165px;
   padding: 0 60px;
+
+  // padding: 0 4%;
 `;
 
 const HandlePrev = styled.span`
