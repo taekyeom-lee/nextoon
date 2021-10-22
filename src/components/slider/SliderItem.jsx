@@ -28,6 +28,11 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
   const closeModal = () => {
     setDetailModalIsOpen(false);
     mouseLeaveItem();
+
+    const root = document.getElementById('root');
+
+    root.style.position = 'static';
+    root.style.top = '0';
   };
 
   return (

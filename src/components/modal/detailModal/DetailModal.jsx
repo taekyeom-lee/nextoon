@@ -5,8 +5,17 @@ import EpisodeCard from './EpisodeCard';
 import MoreLikeContainer from './MoreLikeContainer';
 
 import girl from '../../../img/girl.jpg';
+import { useEffect } from 'react';
 
 function DetailModal({ onClose }) {
+  useEffect(() => {
+    const root = document.getElementById('root');
+    const y = window.scrollY;
+
+    root.style.position = 'fixed';
+    root.style.top = -y + 'px';
+  });
+
   return (
     <DetailModalBlock>
       <DetailModalImage>
@@ -46,7 +55,7 @@ function DetailModal({ onClose }) {
 
 const DetailModalBlock = styled.div`
   position: absolute;
-  top: 40px;
+  top: 0;
   left: calc((100% - 850px) / 2);
 
   width: 850px;
@@ -55,8 +64,6 @@ const DetailModalBlock = styled.div`
   border-radius: 4px;
   z-index: 100;
   background-color: #141414;
-
-  // overflow-y: initial !important;
 
   :hover {
     cursor: pointer;
