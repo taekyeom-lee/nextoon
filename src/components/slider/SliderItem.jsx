@@ -21,8 +21,14 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
 
   const [detailModaIsOpen, setDetailModalIsOpen] = useState(false);
 
+  let yPosition;
+
   const highFunction = (toggle) => {
     setDetailModalIsOpen(toggle);
+  };
+
+  const secondHighFunction = (y) => {
+    yPosition = y;
   };
 
   const closeModal = () => {
@@ -33,35 +39,36 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
 
     root.style.position = 'static';
     root.style.top = '0';
+
+    window.scrollTo(0, yPosition);
   };
 
   return (
-    <SliderItemBlock
-      // onMouseOver={mouseEnterItem}
-      onMouseEnter={mouseEnterItem}
-      onMouseLeave={mouseLeaveItem}
-      $index={index}
-      ref={titleCardRef}
-    >
-      <TitleCard src={dataImg} alt="title-card" />
-      {previewModalIsOpen && !detailModaIsOpen && (
-        <PreviewModalPortal>
-          <PreviewModal
-            index={index}
-            dataImg={dataImg}
-            relativeTop={relativeTop}
-            relativeLeft={titleCardRef.current.offsetLeft}
-            pageNumber={pageNumber}
-            width={width}
-            height={height}
-            totalWidth={totalWidth}
-            propFunction={highFunction}
-          />
-        </PreviewModalPortal>
-      )}
+    <SliderItemBlock $index={index} ref={titleCardRef}>
+      <TitleCardContainer
+        onMouseEnter={mouseEnterItem}
+        onMouseLeave={mouseLeaveItem}
+      >
+        <TitleCard src={dataImg} alt="title-card" />
+        {previewModalIsOpen && !detailModaIsOpen && (
+          <PreviewModalPortal>
+            <PreviewModal
+              index={index}
+              dataImg={dataImg}
+              relativeTop={relativeTop}
+              relativeLeft={titleCardRef.current.offsetLeft}
+              pageNumber={pageNumber}
+              width={width}
+              height={height}
+              totalWidth={totalWidth}
+              propFunction={highFunction}
+            />
+          </PreviewModalPortal>
+        )}
+      </TitleCardContainer>
       {detailModaIsOpen && (
         <DetailModalPortal>
-          <DetailModal onClose={closeModal} />
+          <DetailModal onClose={closeModal} propFunction={secondHighFunction} />
           <DetailBackdrop onClose={closeModal} />
         </DetailModalPortal>
       )}
@@ -74,6 +81,11 @@ const SliderItemBlock = styled.div`
   z-index: 10;
   flex: 0 0 calc(16.66666667% - 4px);
   margin: 0 2px;
+`;
+
+const TitleCardContainer = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 const TitleCard = styled.img`

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
@@ -5,15 +6,18 @@ import EpisodeCard from './EpisodeCard';
 import MoreLikeContainer from './MoreLikeContainer';
 
 import girl from '../../../img/girl.jpg';
-import { useEffect } from 'react';
 
-function DetailModal({ onClose }) {
+function DetailModal({ onClose, propFunction }) {
   useEffect(() => {
     const root = document.getElementById('root');
     const y = window.scrollY;
 
+    propFunction(y);
+
     root.style.position = 'fixed';
     root.style.top = -y + 'px';
+
+    window.scrollTo(0, 0);
   });
 
   return (
