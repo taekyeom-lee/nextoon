@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Header from './Header';
+import Footer from '../footer/Footer';
 
 function PageTemplate({ children }) {
   return (
@@ -9,6 +10,9 @@ function PageTemplate({ children }) {
         <Header />
       </>
       {children}
+      <>
+        <Footer />
+      </>
     </PageTemplateBlock>
   );
 }

@@ -1,5 +1,6 @@
 import Header from '../../components/base/Header';
 import LocoRow from '../../components/locoRow/LocoRow';
+import Footer from '../../components/footer/Footer';
 
 function HomePage() {
   return (
@@ -18,6 +19,7 @@ function HomePage() {
       <LocoRow title="이태겸님이 감상중인 콘텐츠 7777777" />
       <LocoRow title="이태겸님이 감상중인 콘텐츠 88888888" />
       <LocoRow title="이태겸님이 감상중인 콘텐츠 999999999" />
+      <Footer />
     </div>
   );
 }
