@@ -6,19 +6,11 @@ import NovelPage from './pages/novel/NovelPage';
 import LastestPage from './pages/latest/LastestPage';
 import MyListPage from './pages/mylist/MyListPage';
 
+import LoginPage from './pages/login/LoginPage';
+
 import './App.css';
 
 function App() {
-  // const openPreviewDetailModal = () => {
-  //   setPreviewDetailModalIsOpen(true);
-  //   pageRef.current.style.position = 'fixed';
-  // };
-
-  // const closePreviewDetailModal = () => {
-  //   setPreviewDetailModalIsOpen(false);
-  //   pageRef.current.style.position = '';
-  // };
-
   return (
     <div className="App">
       <div>
@@ -28,6 +20,8 @@ function App() {
           <Route path="/novel" component={NovelPage} />
           <Route path="/latest" component={LastestPage} />
           <Route path="/my-list" component={MyListPage} />
+          
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </div>
     </div>
