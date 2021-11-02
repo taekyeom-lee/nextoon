@@ -59,29 +59,6 @@ function LoginFormMain() {
           <HelpLink>도움이 필요하신가요?</HelpLink>
         </LoginFormHelp>
       </Form>
-      <LoginFormOther>
-        <FbButton>
-          <FbLogin>
-            <FbBtnText>Google로 로그인</FbBtnText>
-          </FbLogin>
-        </FbButton>
-        <LoginSignupNow>
-          NEXToon 회원이 아닌가요?
-          <LoginSignupLink>지금 가입하세요</LoginSignupLink>.
-        </LoginSignupNow>
-        <RecaptchaTermsOfUse>
-          <p>
-            <span>
-              이 페이지는 Google reCAPTCHA의 보호를 받아 사용자가 로봇이 아님을
-              확인합니다.
-            </span>
-            &nbsp;
-            <RecaptchaTermsOfUseLinkButton>
-              자세히 알아보기
-            </RecaptchaTermsOfUseLinkButton>
-          </p>
-        </RecaptchaTermsOfUse>
-      </LoginFormOther>
     </LoginFormMainBlock>
   );
 }
@@ -232,66 +209,6 @@ const HelpLink = styled.a`
     cursor: pointer;
     text-decoration: underline;
   }
-`;
-
-// login-form-other
-const LoginFormOther = styled.div``;
-
-// login-signup-now
-const LoginSignupNow = styled.div`
-  color: #737373;
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 16px;
-`;
-
-const LoginSignupLink = styled.a`
-  color: white;
-  margin-left: 4px;
-
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
-// recaptcha-terms-of-use
-const RecaptchaTermsOfUse = styled.div`
-  margin-top: 11px;
-  font-size: 13px;
-  color: #8c8c8c;
-`;
-
-// recaptcha-terms-of-use--link-button
-const RecaptchaTermsOfUseLinkButton = styled.button`
-  background-color: transparent;
-  border: none;
-  color: #0071eb;
-  cursor: pointer;
-  display: inline;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0;
-`;
-
-const FbButton = styled.button`
-  margin-top: 16px;
-  background-color: transparent;
-  border: none;
-  color: #0071eb;
-  cursor: pointer;
-  display: inline;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0;
-`;
-
-const FbLogin = styled.div``;
-
-const FbBtnText = styled.span`
-  color: #737373;
-  font-size: 13px;
-  font-weight: 500;
 `;
 
 export default LoginFormMain;
