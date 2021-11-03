@@ -7,6 +7,8 @@ import LastestPage from './pages/latest/LastestPage';
 import MyListPage from './pages/mylist/MyListPage';
 
 import LoginPage from './pages/login/LoginPage';
+import SignUpPage from './pages/signup/SignUpPage';
+import RegisterPage from './pages/register/RegisterPage';
 
 import './App.css';
 
@@ -22,6 +24,8 @@ function App() {
           <Route path="/my-list" component={MyListPage} />
           
           <Route path="/login" component={LoginPage} />
+          <Route path='/signup' component={SignUpPage} />
+          <Route path='/register' component={RegisterPage} />
         </Switch>
       </div>
     </div>
