@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 function RegisterForm() {
+  const selected = useSelector((state) => state.auth);
+
+  console.log(selected);
+
   return (
     <RegisterFormBlock>
       <RegisterCenter>
@@ -20,7 +25,7 @@ function RegisterForm() {
             <SimpleForm>
               <InputReadOnly>
                 <LabelReadOnly>이메일 주소</LabelReadOnly>
-                <ValueReadOnly>lee@test.com</ValueReadOnly>
+                <ValueReadOnly>{selected.email}</ValueReadOnly>
               </InputReadOnly>
               <PasswordContainer>
                 <PasswordInput />
