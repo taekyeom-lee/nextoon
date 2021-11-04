@@ -1,11 +1,27 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { setEmailAddress } from '../../store/actions/authActions';
+
 function EmailInputForm() {
+  const [email, setEmail] = useState('');
+
+  const dispatch = useDispatch();
+
+  const onChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onClick = () => {
+    dispatch(setEmailAddress(email));
+  };
+
   return (
     <EmailInputFormBlock>
-      <EmailInput id="email"></EmailInput>
-      <EmailLabel for="email">이메일 주소</EmailLabel>
-      <EmailButton>시작하기</EmailButton>
+      <EmailInput id="email" onChange={onChange}></EmailInput>
+      <EmailLabel htmlFor="email">이메일 주소</EmailLabel>
+      <EmailButton onClick={onClick}>시작하기</EmailButton>
     </EmailInputFormBlock>
   );
 }
