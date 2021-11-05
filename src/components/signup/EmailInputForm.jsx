@@ -89,7 +89,7 @@ const EmailInput = styled.input`
   box-sizing: border-box;
   border: 0;
   border-bottom: ${(props) => props.$errorMessage && '2px solid #ffa00a'};
-  font-size: px;
+  font-size: 16px;
 
   :focus {
     outline: none;

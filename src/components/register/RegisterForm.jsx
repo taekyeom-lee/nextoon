@@ -1,10 +1,42 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import firebase from '../../api/firebase';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
+import { useHistory } from 'react-router';
+
+import { useState } from 'react';
+
 function RegisterForm() {
+  const [password, setPassword] = useState('');
+
   const selected = useSelector((state) => state.auth);
 
-  console.log(selected);
+  const auth = getAuth(firebase);
+
+  const history = useHistory();
+
+  const onClick = () => {
+    createUserWithEmailAndPassword(auth, selected.email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        console.log(user);
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // ..
+        console.log(error);
+      });
+    history.push('/');
+  };
+
+  const onChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <RegisterFormBlock>
@@ -28,14 +60,14 @@ function RegisterForm() {
                 <ValueReadOnly>{selected.email}</ValueReadOnly>
               </InputReadOnly>
               <PasswordContainer>
-                <PasswordInput />
+                <PasswordInput onChange={onChange} />
                 <PasswordLabel>비밀번호를 입력하세요</PasswordLabel>
               </PasswordContainer>
             </SimpleForm>
 
             <LinkForgotPassword>비밀번호를 잊으셨나요?</LinkForgotPassword>
             <SubmitBtnContainer>
-              <SubmitBtn>등록</SubmitBtn>
+              <SubmitBtn onClick={onClick}>등록</SubmitBtn>
             </SubmitBtnContainer>
           </FormContainer>
         </form>
