@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 import useLoginForm from '../../hooks/useLoginForm';
 
+// import firebase from '../'
+import firebase from '../../api/firebase';
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 function LoginFormMain() {
   const {
     isEmailFocus,
@@ -16,6 +24,40 @@ function LoginFormMain() {
     clickCheckbox,
   } = useLoginForm();
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const history = useHistory();
+
+  const auth = getAuth(firebase);
+
+  const onClick = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        console.log('user', user);
+        history.push('/');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log('errorCode', errorCode);
+        console.log('errorMessage', errorMessage);
+      });
+  };
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <LoginFormMainBlock>
       <Title>로그인</Title>
@@ -25,9 +67,10 @@ function LoginFormMain() {
             id="email"
             onFocus={focusEmailInput}
             onBlur={blurEmailInput}
+            onChange={onChangeEmail}
             ref={emailRef}
           />
-          <EmailLabel for="email" $isEmailFocus={isEmailFocus}>
+          <EmailLabel htmlFor="email" $isEmailFocus={isEmailFocus}>
             이메일 주소
           </EmailLabel>
           <InputError>정확한 이메일 주소를 입력하세요.</InputError>
@@ -37,14 +80,15 @@ function LoginFormMain() {
             id="password"
             onFocus={focusPasswordInput}
             onBlur={blurPasswordInput}
+            onChange={onChangePassword}
             ref={passwordRef}
           />
-          <PasswordLabel for="password" $isPasswordFocus={isPasswordFocus}>
+          <PasswordLabel htmlFor="password" $isPasswordFocus={isPasswordFocus}>
             비밀번호
           </PasswordLabel>
           <InputError>비밀번호는 4 - 60자 사이여야 합니다.</InputError>
         </LoginFiledContainer>
-        <Button>로그인</Button>
+        <Button onClick={onClick}>로그인</Button>
         <LoginFormHelp>
           <HelpRemember>
             <RememberCheckbox
@@ -52,7 +96,7 @@ function LoginFormMain() {
               type="checkbox"
               onClick={clickCheckbox}
             />
-            <RememberText for="remember" $isChecked={isChecked}>
+            <RememberText htmlFor="remember" $isChecked={isChecked}>
               로그인 정보 저장
             </RememberText>
           </HelpRemember>

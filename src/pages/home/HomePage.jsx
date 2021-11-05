@@ -2,7 +2,26 @@ import Header from '../../components/base/Header';
 import LocoRow from '../../components/locoRow/LocoRow';
 import Footer from '../../components/footer/Footer';
 
+import firebase from '../../api/firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 function HomePage() {
+  const auth = getAuth(firebase);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log('home_user', user);
+      console.log('home_uid', uid);
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
   return (
     <div>
       <Header />

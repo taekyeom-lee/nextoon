@@ -17,13 +17,15 @@ function RegisterForm() {
 
   const history = useHistory();
 
-  const onClick = () => {
+  const onClick = (e) => {
+    e.preventDefault();
     createUserWithEmailAndPassword(auth, selected.email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
         console.log(user);
+        history.push('/');
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -31,7 +33,6 @@ function RegisterForm() {
         // ..
         console.log(error);
       });
-    history.push('/');
   };
 
   const onChange = (e) => {
