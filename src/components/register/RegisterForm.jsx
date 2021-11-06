@@ -8,12 +8,15 @@ import { useHistory } from 'react-router';
 
 import { useState } from 'react';
 
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+
 function RegisterForm() {
   const [password, setPassword] = useState('');
 
   const selected = useSelector((state) => state.auth);
 
   const auth = getAuth(firebase);
+  const db = getFirestore(firebase);
 
   const history = useHistory();
 
@@ -24,8 +27,13 @@ function RegisterForm() {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log(user);
+        console.log('register_form user', user);
         history.push('/');
+
+        console.log('register_form user_id');
+
+        const docRef = doc(db, 'users', user.uid);
+        setDoc(docRef, { email: selected.email });
       })
       .catch((error) => {
         // const errorCode = error.code;

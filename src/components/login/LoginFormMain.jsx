@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import useLoginForm from '../../hooks/useLoginForm';
 
-// import firebase from '../'
 import firebase from '../../api/firebase';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
