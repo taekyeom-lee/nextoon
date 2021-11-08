@@ -15,7 +15,7 @@ import usePreviewModalButton from '../../../hooks/usePreviewModalButton';
 
 function PreViewModal({
   index,
-  dataImg,
+  data,
   relativeTop,
   relativeLeft,
   pageNumber,
@@ -38,6 +38,7 @@ function PreViewModal({
   useEffect(() => {
     propFunction(angleDownButtonIsSelected);
   });
+
   return (
     <PreviewModalBlock
       $index={index}
@@ -49,7 +50,7 @@ function PreViewModal({
     >
       <PreviewModalImage>
         <ImageContainer $width={width} $height={height}>
-          <Image src={dataImg} />
+          <Image src={data.img} />
         </ImageContainer>
       </PreviewModalImage>
       <PreviewModalInfo>
@@ -83,24 +84,24 @@ function PreViewModal({
         <TextContainer>
           <TextItem>
             <Star />
-            <Rating>9.95</Rating>
+            <Rating>{data.rating}</Rating>
           </TextItem>
           <TextItem>
-            <Writer>이태겸/리태겸</Writer>
+            {data.writer.map((writer, index) =>
+              writer.map(
+                (penName, index) =>
+                  index !== 0 && <Writer key={index}>{penName}</Writer>
+              )
+            )}
           </TextItem>
         </TextContainer>
         <TagContainer>
-          <TagItem>
-            <Tag>무협</Tag>
-          </TagItem>
-          <TagItem>
-            <TagSeparater>·</TagSeparater>
-            <Tag>학원</Tag>
-          </TagItem>
-          <TagItem>
-            <TagSeparater>·</TagSeparater>
-            <Tag>판타지</Tag>
-          </TagItem>
+          {data.tags.map((tag, index) => (
+            <TagItem key={index}>
+              {index !== 0 && <TagSeparater>·</TagSeparater>}
+              <Tag>{tag}</Tag>
+            </TagItem>
+          ))}
         </TagContainer>
       </PreviewModalInfo>
     </PreviewModalBlock>
@@ -266,7 +267,13 @@ const Star = styled(FaStar)`
 
 const Rating = styled.span``;
 
-const Writer = styled.span``;
+const Writer = styled.span`
+  padding-right: 8px;
+
+  &:last-child {
+    padding: 0px;
+  }
+`;
 
 const TagContainer = styled.div`
   display: flex;

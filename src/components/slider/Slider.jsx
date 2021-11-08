@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import SliderItem from './SliderItem';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-function Slider({ datas, pageNumber, relativeTop }) {
+function Slider({ data, pageNumber, relativeTop }) {
   const { width } = useWindowDimensions();
 
   return (
     <SliderBlock $pageNumber={pageNumber} $width={width}>
-      {datas.map((data, index) => (
+      {data.map((data, index) => (
         <SliderItem
           key={data.id}
-          dataImg={data.dataImg}
+          data={data}
           index={index}
           relativeTop={relativeTop}
           pageNumber={pageNumber}

@@ -22,5 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#API KEY
+# API KEY
 .env
+
+# resources
+/src/resources

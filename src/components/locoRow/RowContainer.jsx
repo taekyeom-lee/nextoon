@@ -4,7 +4,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Slider from '../slider/Slider';
 import useRowContainer from '../../hooks/useRowContainer';
 
-function RowContainer({ datas }) {
+function RowContainer({ data }) {
   const {
     pageNumber,
     relativeTop,
@@ -30,7 +30,7 @@ function RowContainer({ datas }) {
         <li></li>
         <li></li>
       </PaginationIndicator>
-      <Slider datas={datas} pageNumber={pageNumber} relativeTop={relativeTop} />
+      <Slider data={data} pageNumber={pageNumber} relativeTop={relativeTop} />
       {pageNumber !== 7 && (
         <HandleNext>
           <RightAngle onClick={raisePageNumber} />

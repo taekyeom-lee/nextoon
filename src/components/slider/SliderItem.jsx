@@ -9,7 +9,7 @@ import usePreviewModal from '../../hooks/usePreviewModal';
 import PreviewModalPortal from '../../portal/PreviewModalPortal';
 import DetailModalPortal from '../../portal/DetailModalPortal';
 
-function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
+function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
   const {
     previewModalIsOpen,
     width,
@@ -49,12 +49,12 @@ function SliderItem({ dataImg, index, relativeTop, pageNumber, totalWidth }) {
         onMouseEnter={mouseEnterItem}
         onMouseLeave={mouseLeaveItem}
       >
-        <TitleCard src={dataImg} alt="title-card" />
+        <TitleCard src={data.img} alt="title-card" />
         {previewModalIsOpen && !detailModaIsOpen && (
           <PreviewModalPortal>
             <PreviewModal
               index={index}
-              dataImg={dataImg}
+              data={data}
               relativeTop={relativeTop}
               relativeLeft={titleCardRef.current.offsetLeft}
               pageNumber={pageNumber}
