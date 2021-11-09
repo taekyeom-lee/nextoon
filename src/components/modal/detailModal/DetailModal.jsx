@@ -5,9 +5,7 @@ import { MdClose } from 'react-icons/md';
 import EpisodeCard from './EpisodeCard';
 import MoreLikeContainer from './MoreLikeContainer';
 
-import girl from '../../../img/girl.jpg';
-
-function DetailModal({ onClose, propFunction }) {
+function DetailModal({ data, onClose, propFunction }) {
   useEffect(() => {
     const root = document.getElementById('root');
     const y = window.scrollY;
@@ -24,7 +22,7 @@ function DetailModal({ onClose, propFunction }) {
     <DetailModalBlock>
       <DetailModalImage>
         <ImageContainer>
-          <Image src={girl} />
+          <Image src={data.img} />
         </ImageContainer>
         <Close onClick={onClose}>
           <CloseButton />
@@ -32,8 +30,26 @@ function DetailModal({ onClose, propFunction }) {
       </DetailModalImage>
       <DetailModalInfo>
         <DetailContainer>
-          Detail Blur Blur Blur Blur Blur... Blur Blur Blur Blur Blur... Blur
-          Blur Blur Blur Blur...
+          <DetailData>
+            <DetailTitle>작품설명</DetailTitle>
+            <DetailInfo>{data.description}</DetailInfo>
+          </DetailData>
+          <DetailData>
+            <DetailTitle>작가</DetailTitle>
+            <DetailAuthors>
+              {data.writer.map((writer, index) => (
+                <DetailAuthor key={index}>
+                  {writer.map((writer, index) =>
+                    index === 0 ? (
+                      <DetailLabel key={index}>{writer}</DetailLabel>
+                    ) : (
+                      <DetailItem key={index}>{writer}</DetailItem>
+                    )
+                  )}
+                </DetailAuthor>
+              ))}
+            </DetailAuthors>
+          </DetailData>
         </DetailContainer>
         <EpisodeContainer>
           <EpisodeHeader>
@@ -113,6 +129,38 @@ const DetailModalInfo = styled.div`
 // DetailContainer
 const DetailContainer = styled.div`
   display: flex;
+  justify-content: space-between;
+`;
+
+const DetailData = styled.div`
+  display: flex;
+  padding: 8px 0px;
+`;
+
+const DetailInfo = styled.div``;
+
+const DetailTitle = styled.div`
+  width: 90px;
+  font-size: 20px;
+`;
+
+const DetailAuthors = styled.ul`
+  margin: 0;
+`;
+
+const DetailAuthor = styled.li`
+  list-style: none;
+`;
+
+const DetailLabel = styled.span`
+  color: #777;
+  padding-right: 8px;
+`;
+
+const DetailItem = styled.span`
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 // EpisodeContainer

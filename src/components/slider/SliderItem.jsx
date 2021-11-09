@@ -68,7 +68,11 @@ function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
       </TitleCardContainer>
       {detailModaIsOpen && (
         <DetailModalPortal>
-          <DetailModal onClose={closeModal} propFunction={secondHighFunction} />
+          <DetailModal
+            data={data}
+            onClose={closeModal}
+            propFunction={secondHighFunction}
+          />
           <DetailBackdrop onClose={closeModal} />
         </DetailModalPortal>
       )}
