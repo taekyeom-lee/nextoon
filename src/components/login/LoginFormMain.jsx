@@ -38,7 +38,7 @@ function LoginFormMain() {
         const user = userCredential.user;
         // ...
         console.log('user', user);
-        history.push('/');
+        history.push('/browse');
       })
       .catch((error) => {
         const errorCode = error.code;

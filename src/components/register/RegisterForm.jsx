@@ -28,7 +28,7 @@ function RegisterForm() {
         const user = userCredential.user;
         // ...
         console.log('register_form user', user);
-        history.push('/');
+        history.push('/browse');
 
         console.log('register_form user_id');
 

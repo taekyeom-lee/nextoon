@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function SignUpHeader() {
   return (
     <SignUpHeaderBlock>
-      <SignUpLogo>NEXToon</SignUpLogo>
+      <SignUpLogo to="/">NEXToon</SignUpLogo>
       <SignUpButton to="/login">로그인</SignUpButton>
     </SignUpHeaderBlock>
   );
@@ -19,10 +19,11 @@ const SignUpHeaderBlock = styled.div`
   margin: 0 3.5rem;
 `;
 
-const SignUpLogo = styled.span`
+const SignUpLogo = styled(Link)`
   font-size: 2.5rem;
   font-weight: 600;
   color: #e50914;
+  text-decoration: none;
 `;
 
 const SignUpButton = styled(Link)`
@@ -32,10 +33,6 @@ const SignUpButton = styled(Link)`
   text-decoration: none;
   padding: 8px 20px;
   border-radius: 4px;
-
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 export default SignUpHeader;

@@ -9,27 +9,27 @@ function HeaderPrimaryNav() {
       <HeaderLogo />
       <ul>
         <li>
-          <NavLink to="/" activeClassName="active" exact>
+          <NavLink to="/browse" activeClassName="active" exact>
             홈
           </NavLink>
         </li>
         <li>
-          <NavLink to="/comic" activeClassName="active">
+          <NavLink to="/browse/comic" activeClassName="active">
             웹툰
           </NavLink>
         </li>
         <li>
-          <NavLink to="/novel" activeClassName="active">
+          <NavLink to="/browse/novel" activeClassName="active">
             소설
           </NavLink>
         </li>
         <li>
-          <NavLink to="/latest" activeClassName="active">
+          <NavLink to="/browse/latest" activeClassName="active">
             NEW! 요즘 대세 콘텐츠
           </NavLink>
         </li>
         <li>
-          <NavLink to="/my-list" activeClassName="active">
+          <NavLink to="/browse/my-list" activeClassName="active">
             내가 찜한 콘텐츠
           </NavLink>
         </li>

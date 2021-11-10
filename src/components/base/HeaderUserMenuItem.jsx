@@ -5,14 +5,19 @@ import { getAuth, signOut } from 'firebase/auth';
 
 import firebase from '../../api/firebase';
 
+import { useHistory } from 'react-router-dom';
+
 function HeaderUserMenuItem({ children }) {
   const auth = getAuth(firebase);
+
+  const history = useHistory();
 
   const onClick = () => {
     console.log('header_signout');
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        history.push('/');
       })
       .catch((error) => {
         // An error happened.

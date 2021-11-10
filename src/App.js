@@ -17,17 +17,16 @@ function App() {
     <div className="App">
       <div>
         <Switch>
-          <Route path="/" exact render={() => <HomePage />} />
-          <Route path="/comic" component={ComicPage} />
-          <Route path="/novel" component={NovelPage} />
-          <Route path="/latest" component={LastestPage} />
-          <Route path="/my-list" component={MyListPage} />
-          
+          <Route path="/" exact component={SignUpPage} />
+          <Route path="/register" component={RegisterPage} />
           <Route path="/login" component={LoginPage} />
-          <Route path='/logout' component={LogoutPage} />
-          
-          <Route path='/signup' component={SignUpPage} />
-          <Route path='/register' component={RegisterPage} />
+          <Route path="/logout" component={LogoutPage} />
+
+          <Route path="/browse" exact component={HomePage} />
+          <Route path="/browse/comic" component={ComicPage} />
+          <Route path="/browse/novel" component={NovelPage} />
+          <Route path="/browse/latest" component={LastestPage} />
+          <Route path="/browse/my-list" component={MyListPage} />
         </Switch>
       </div>
     </div>

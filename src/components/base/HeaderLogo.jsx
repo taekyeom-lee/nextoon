@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function HeaderLogo() {
   return (
     <HeaderLogoBlock>
-      <Link to="/">NEXToon</Link>
+      <Link to="/browse">NEXToon</Link>
     </HeaderLogoBlock>
   );
 }
