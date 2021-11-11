@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import HomePage from './pages/home/HomePage';
 import ComicPage from './pages/comic/ComicPage';
@@ -12,23 +12,70 @@ import SignUpPage from './pages/signup/SignUpPage';
 import RegisterPage from './pages/register/RegisterPage';
 import './App.css';
 
+import useAuth from './hooks/useAuth';
+
 function App() {
+  const { init, isLogin } = useAuth();
+
+  const history = useHistory();
+
   return (
     <div className="App">
-      <div>
-        <Switch>
-          <Route path="/" exact component={SignUpPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/logout" component={LogoutPage} />
+      {init ? (
+        <div>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() =>
+                isLogin ? history.push('/browse') : <SignUpPage />
+              }
+            />
+            <Route
+              path="/register"
+              render={() =>
+                isLogin ? history.push('/browse') : <RegisterPage />
+              }
+            />
+            <Route
+              path="/login"
+              render={() => (isLogin ? history.push('/browse') : <LoginPage />)}
+            />
+            <Route
+              path="/logout"
+              render={() =>
+                isLogin ? history.push('/browse') : <LogoutPage />
+              }
+            />
 
-          <Route path="/browse" exact component={HomePage} />
-          <Route path="/browse/comic" component={ComicPage} />
-          <Route path="/browse/novel" component={NovelPage} />
-          <Route path="/browse/latest" component={LastestPage} />
-          <Route path="/browse/my-list" component={MyListPage} />
-        </Switch>
-      </div>
+            <Route
+              path="/browse"
+              exact
+              render={() => (isLogin ? <HomePage /> : history.push('/login'))}
+            />
+            <Route
+              path="/browse/comic"
+              render={() => (isLogin ? <ComicPage /> : history.push('/login'))}
+            />
+            <Route
+              path="/browse/novel"
+              render={() => (isLogin ? <NovelPage /> : history.push('/login'))}
+            />
+            <Route
+              path="/browse/latest"
+              render={() =>
+                isLogin ? <LastestPage /> : history.push('/login')
+              }
+            />
+            <Route
+              path="/browse/my-list"
+              render={() => (isLogin ? <MyListPage /> : history.push('/login'))}
+            />
+          </Switch>
+        </div>
+      ) : (
+        <div>Loding</div>
+      )}
     </div>
   );
 }
