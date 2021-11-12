@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addMyList, removeMyList } from '../store/actions/authActions';
+import {
+  addMyList,
+  removeMyList,
+  addMyLikeList,
+  removeMyLikeList,
+  addMyDislikeList,
+  removeMyDislikeList,
+} from '../store/actions/authActions';
 
-function usePreviewModalButton(data) {
+function usePreviewModalButton(item) {
   const [plusButtonIsSelected, setPlusButtonIsSelected] = useState(false);
   const [likeButtonIsSelected, setLikeButtonIsSelected] = useState(false);
   const [dislikeButtonIsSelected, setDislikeButtonIsSelected] = useState(false);
@@ -18,19 +25,36 @@ function usePreviewModalButton(data) {
     setPlusButtonIsSelected((prevState) => !prevState);
 
     !plusButtonIsSelected
-      ? dispatch(addMyList(data))
-      : dispatch(removeMyList(data));
+      ? dispatch(addMyList(item))
+      : dispatch(removeMyList(item));
   };
 
   const clickLikeButton = () => {
     setLikeButtonIsSelected((prevState) => !prevState);
-    dislikeButtonIsSelected &&
+
+    // like가 true일때
+    !likeButtonIsSelected
+      ? dispatch(addMyLikeList(item))
+      : dispatch(removeMyLikeList(item));
+
+    if (dislikeButtonIsSelected) {
       setDislikeButtonIsSelected((prevState) => !prevState);
+      dispatch(removeMyDislikeList(item));
+    }
   };
 
   const clickDislikeButton = () => {
     setDislikeButtonIsSelected((prevState) => !prevState);
-    likeButtonIsSelected && setLikeButtonIsSelected((prevState) => !prevState);
+
+    // dislike가 true일때
+    !dislikeButtonIsSelected
+      ? dispatch(addMyDislikeList(item))
+      : dispatch(removeMyDislikeList(item));
+
+    if (likeButtonIsSelected) {
+      setLikeButtonIsSelected((prevState) => !prevState);
+      dispatch(removeMyLikeList(item));
+    }
   };
 
   const clickAngleDownButton = () => {
@@ -38,12 +62,36 @@ function usePreviewModalButton(data) {
   };
 
   useEffect(() => {
-    const initState = selected.mylist.find((item) => item.id === data.id)
+    const initPlusState = selected.myList.find(
+      (myListItem) => myListItem.id === item.id
+    )
       ? true
       : false;
 
-    setPlusButtonIsSelected(initState);
-  }, [setPlusButtonIsSelected, data.id, selected.mylist]);
+    const initLikeState = selected.myLikeList.find(
+      (myLikeListItem) => myLikeListItem.id === item.id
+    )
+      ? true
+      : false;
+
+    const initDislikeState = selected.myDislikeList.find(
+      (myDislikeListItem) => myDislikeListItem.id === item.id
+    )
+      ? true
+      : false;
+
+    setPlusButtonIsSelected(initPlusState);
+    setLikeButtonIsSelected(initLikeState);
+    setDislikeButtonIsSelected(initDislikeState);
+  }, [
+    setPlusButtonIsSelected,
+    setLikeButtonIsSelected,
+    setDislikeButtonIsSelected,
+    selected.myList,
+    selected.myLikeList,
+    selected.myDislikeList,
+    item.id,
+  ]);
 
   return {
     plusButtonIsSelected,
