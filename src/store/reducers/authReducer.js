@@ -2,6 +2,7 @@ import * as authActions from '../actions/authActions';
 
 const initState = {
   email: '',
+  mylist: [],
 };
 
 const reducer = (state = initState, action) => {
@@ -11,10 +12,16 @@ const reducer = (state = initState, action) => {
         ...state,
         email: action.email,
       };
-    // case authActions.AUTH_RESET_EMAIL:
-    //   return {
-    //     ...state,
-    //   }
+    case authActions.AUTH_ADD_MY_LIST:
+      return {
+        ...state,
+        mylist: state.mylist.concat(action.data),
+      };
+    case authActions.AUTH_REMOVE_MY_LIST:
+      return {
+        ...state,
+        mylist: state.mylist.filter((data) => data.id !== action.data.id),
+      };
     default:
       return state;
   }

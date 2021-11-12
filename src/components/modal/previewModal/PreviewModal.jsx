@@ -33,7 +33,7 @@ function PreViewModal({
     clickLikeButton,
     clickDislikeButton,
     clickAngleDownButton,
-  } = usePreviewModalButton();
+  } = usePreviewModalButton(data);
 
   useEffect(() => {
     propFunction(angleDownButtonIsSelected);
