@@ -17,6 +17,8 @@ function PageTemplate({ children }) {
   );
 }
 
-const PageTemplateBlock = styled.div``;
+const PageTemplateBlock = styled.div`
+  width: 100vw;
+`;
 
 export default PageTemplate;

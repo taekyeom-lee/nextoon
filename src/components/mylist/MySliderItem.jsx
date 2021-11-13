@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import DetailModalPortal from '../../portal/DetailModalPortal';
 import PreviewModalPortal from '../../portal/PreviewModalPortal';
+import DetailBackdrop from '../modal/detailModal/DetailBackdrop';
+import DetailModal from '../modal/detailModal/DetailModal';
 import PreViewModal from '../modal/previewModal/PreviewModal';
 
 function MySliderItem({ item, index, totalWidth }) {
@@ -12,6 +15,8 @@ function MySliderItem({ item, index, totalWidth }) {
   const titleCardRef = useRef(null);
 
   const pageNumber = 1;
+
+  let yPosition;
 
   const mouseEnterItem = () => {
     setPreviewModalIsOpen(true);
@@ -29,6 +34,22 @@ function MySliderItem({ item, index, totalWidth }) {
     setDetailModalIsOpen(toggle);
   };
 
+  const secondHighFunction = (y) => {
+    yPosition = y;
+  };
+
+  const closeModal = () => {
+    setDetailModalIsOpen(false);
+    mouseLeaveItem();
+
+    const root = document.getElementById('root');
+
+    root.style.position = 'static';
+    root.style.top = '0';
+
+    window.scrollTo(0, yPosition);
+  };
+
   return (
     <MySliderItemBlock ref={titleCardRef}>
       <TitleCardContainer
@@ -36,7 +57,7 @@ function MySliderItem({ item, index, totalWidth }) {
         onMouseLeave={mouseLeaveItem}
       >
         <TitleCard src={item.img} alt="title-card" />
-        {previewModalIsOpen && (
+        {previewModalIsOpen && !detailModalIsOpen && (
           <PreviewModalPortal>
             <PreViewModal
               data={item}
@@ -52,7 +73,16 @@ function MySliderItem({ item, index, totalWidth }) {
           </PreviewModalPortal>
         )}
       </TitleCardContainer>
-      {detailModalIsOpen && console.log('detail')}
+      {detailModalIsOpen && (
+        <DetailModalPortal>
+          <DetailModal
+            data={item}
+            onClose={closeModal}
+            propFunction={secondHighFunction}
+          />
+          <DetailBackdrop onClose={closeModal} />
+        </DetailModalPortal>
+      )}
     </MySliderItemBlock>
   );
 }
