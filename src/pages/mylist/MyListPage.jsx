@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import PageTemplate from '../../components/base/PageTemplate';
+import MyList from '../../components/mylist/MyList';
 
 function MyListPage() {
   return (
@@ -8,6 +9,7 @@ function MyListPage() {
       <SubHeaderWrapper>
         <GenreTitle>내가 찜한 콘텐츠</GenreTitle>
       </SubHeaderWrapper>
+      <MyList />
     </PageTemplate>
   );
 }
