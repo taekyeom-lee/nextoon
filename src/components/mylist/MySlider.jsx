@@ -1,11 +1,19 @@
 import styled from 'styled-components';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import MySliderItem from './MySliderItem';
 
 function MySlider({ list }) {
+  const { width } = useWindowDimensions();
+
   return (
     <MySliderBlock>
       {list.map((item, index) => (
-        <MySliderItem key={index} item={item} index={index} />
+        <MySliderItem
+          key={index}
+          item={item}
+          index={index}
+          totalWidth={width}
+        />
       ))}
     </MySliderBlock>
   );

@@ -19,7 +19,7 @@ function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
     mouseLeaveItem,
   } = usePreviewModal();
 
-  const [detailModaIsOpen, setDetailModalIsOpen] = useState(false);
+  const [detailModalIsOpen, setDetailModalIsOpen] = useState(false);
 
   let yPosition;
 
@@ -50,7 +50,7 @@ function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
         onMouseLeave={mouseLeaveItem}
       >
         <TitleCard src={data.img} alt="title-card" />
-        {previewModalIsOpen && !detailModaIsOpen && (
+        {previewModalIsOpen && !detailModalIsOpen && (
           <PreviewModalPortal>
             <PreviewModal
               index={index}
@@ -66,7 +66,7 @@ function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
           </PreviewModalPortal>
         )}
       </TitleCardContainer>
-      {detailModaIsOpen && (
+      {detailModalIsOpen && (
         <DetailModalPortal>
           <DetailModal
             data={data}
