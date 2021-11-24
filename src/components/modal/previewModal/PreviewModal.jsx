@@ -22,6 +22,8 @@ function PreViewModal({
   width,
   height,
   totalWidth,
+  numberOfPage,
+  leftOfItem,
   propFunction,
 }) {
   const {
@@ -47,6 +49,8 @@ function PreViewModal({
       $pageNumber={pageNumber}
       $width={width}
       $totalWidth={totalWidth}
+      $numberOfPage={numberOfPage}
+      $leftOfItem={leftOfItem}
     >
       <PreviewModalImage>
         <ImageContainer $width={width} $height={height}>
@@ -108,24 +112,72 @@ function PreViewModal({
   );
 }
 
-const handleLeftType = (relativeLeft, pageNumber, width, totalWidth) => {
-  const left = relativeLeft - (totalWidth - 60 * 2 - 17) * (pageNumber - 1);
+const handleLeftType = (
+  relativeLeft,
+  pageNumber,
+  width,
+  totalWidth,
+  numberOfPage,
+  leftOfItem
+) => {
+  let left;
+
+  if (pageNumber !== numberOfPage) {
+    left = relativeLeft - (totalWidth - 60 * 2 - 17) * (pageNumber - 1);
+  } else {
+    if (pageNumber !== 1) {
+      left =
+        relativeLeft -
+        (totalWidth - 60 * 2 - 17) * (pageNumber - 1 - 1) -
+        (width + 4) * leftOfItem;
+    } else {
+      left = relativeLeft - (totalWidth - 60 * 2 - 17) * (pageNumber - 1);
+    }
+  }
 
   return `calc((((${
     width * 1.5
   }px - ${width}px) / 2) * -1) + ${left}px + 60px)`;
 };
 
-const handleTransformHoverType = (index, width) => {
+const handleTransformHoverType = (
+  index,
+  width,
+  pageNumber,
+  numberOfPage,
+  leftOfItem
+) => {
   const x = Math.floor((width * 1.5 - width) / 2);
 
-  switch (index % 6) {
-    case 0:
-      return `translateX(${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
-    case 5:
-      return `translateX(-${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
-    default:
-      return 'none';
+  if (pageNumber !== numberOfPage) {
+    switch (index % 6) {
+      case 0:
+        return `translateX(${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+      case 5:
+        return `translateX(-${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+      default:
+        return 'none';
+    }
+  } else {
+    if (pageNumber !== 1) {
+      switch ((index - leftOfItem) % 6) {
+        case 0:
+          return `translateX(${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+        case 5:
+          return `translateX(-${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+        default:
+          return 'none';
+      }
+    } else {
+      switch (index % 6) {
+        case 0:
+          return `translateX(${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+        case 5:
+          return `translateX(-${x}px) translateY(0px) scaleX(1) scaleY(1) translateZ(0px)`;
+        default:
+          return 'none';
+      }
+    }
   }
 };
 
@@ -137,7 +189,9 @@ const PreviewModalBlock = styled.div`
       props.$relativeLeft,
       props.$pageNumber,
       props.$width,
-      props.$totalWidth
+      props.$totalWidth,
+      props.$numberOfPage,
+      props.$leftOfItem
     )};
   width: calc(${(props) => props.$width * 1.5}px);
   z-index: 20;
@@ -152,7 +206,13 @@ const PreviewModalBlock = styled.div`
     transform-origin: center center;
     transition: transform 0.5s;
     transform: ${(props) =>
-      handleTransformHoverType(props.$index, props.$width)};
+      handleTransformHoverType(
+        props.$index,
+        props.$width,
+        props.$pageNumber,
+        props.$numberOfPage,
+        props.$leftOfItem
+      )};
   }
 `;
 

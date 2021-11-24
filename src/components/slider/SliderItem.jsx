@@ -9,7 +9,15 @@ import usePreviewModal from '../../hooks/usePreviewModal';
 import PreviewModalPortal from '../../portal/PreviewModalPortal';
 import DetailModalPortal from '../../portal/DetailModalPortal';
 
-function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
+function SliderItem({
+  data,
+  index,
+  relativeTop,
+  pageNumber,
+  totalWidth,
+  numberOfPage,
+  leftOfItem,
+}) {
   const {
     previewModalIsOpen,
     width,
@@ -61,6 +69,8 @@ function SliderItem({ data, index, relativeTop, pageNumber, totalWidth }) {
               width={width}
               height={height}
               totalWidth={totalWidth}
+              numberOfPage={numberOfPage}
+              leftOfItem={leftOfItem}
               propFunction={highFunction}
             />
           </PreviewModalPortal>

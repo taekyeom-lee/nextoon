@@ -4,7 +4,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Slider from '../slider/Slider';
 import useRowContainer from '../../hooks/useRowContainer';
 
-function RowContainer({ data }) {
+function RowContainer({ data, numberOfPage, leftOfItem }) {
   const {
     pageNumber,
     relativeTop,
@@ -22,16 +22,18 @@ function RowContainer({ data }) {
         </HandlePrev>
       )}
       <PaginationIndicator ref={pageRef}>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        {Array.from(Array(numberOfPage), () => (
+          <li></li>
+        ))}
       </PaginationIndicator>
-      <Slider data={data} pageNumber={pageNumber} relativeTop={relativeTop} />
-      {pageNumber !== 7 && (
+      <Slider
+        data={data}
+        numberOfPage={numberOfPage}
+        leftOfItem={leftOfItem}
+        pageNumber={pageNumber}
+        relativeTop={relativeTop}
+      />
+      {pageNumber !== numberOfPage && (
         <HandleNext>
           <RightAngle onClick={raisePageNumber} />
         </HandleNext>

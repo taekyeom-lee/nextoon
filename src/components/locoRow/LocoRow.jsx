@@ -12,10 +12,20 @@ function LocoRow({ title, type }) {
     data = data.filter((data) => data.tags.find((tag) => tag === type));
   }
 
+  let numberOfItem = 6;
+
+  let numberOfPage = Math.ceil(data.length / numberOfItem);
+
+  let leftOfItem = data.length - Math.floor(data.length / numberOfItem) * 6;
+
   return (
     <LocoRowBlock>
       <RowHeader title={title} />
-      <RowContainer data={data} />
+      <RowContainer
+        data={data}
+        numberOfPage={numberOfPage}
+        leftOfItem={leftOfItem}
+      />
     </LocoRowBlock>
   );
 }
