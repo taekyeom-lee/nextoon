@@ -7,6 +7,7 @@
 - react
 - redux
 - styled-components
+- firebase
 
 ## Feature
 
